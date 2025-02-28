@@ -16,7 +16,7 @@ linux:
 	GOOS=linux GOARCH=amd64 $(GO) build -o ./$(APP_NAME)_linux_amd64 ./grepper
 clean:
 	rm -f ./$(APP_NAME) ./$(APP_NAME).exe ./$(APP_NAME)_mac_intel ./$(APP_NAME)_mac_m1 ./$(APP_NAME)_linux_amd64
-install:
+install:ft/makefile
 	sudo mv ./$(APP_NAME)_linux_amd64 /usr/local/bin/grepper
 confirm:
 	sudo chmod +x /usr/local/bin/grepper
