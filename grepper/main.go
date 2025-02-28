@@ -27,8 +27,8 @@ func discoverDirs(wl *worklist.Worklist, path string) {
 }
 
 type Args struct {
-	searchTerm string `arg:"positional,required"`
-	searchDir  string `arg:"positional"`
+	SearchTerm string `arg:"positional,required"`
+	SearchDir  string `arg:"positional"`
 }
 
 func main() {
@@ -41,7 +41,7 @@ func main() {
 	workersWg.Add(1)
 	go func() {
 		defer workersWg.Done()
-		discoverDirs(&wl, args.searchDir)
+		discoverDirs(&wl, args.SearchDir)
 		wl.Finalize(numWorkers)
 	}()
 	for i := 0; i < numWorkers; i++ {
@@ -51,7 +51,7 @@ func main() {
 			for {
 				workEntry := wl.Next()
 				if workEntry.Path != "" {
-					workerResult := worker.FindInFile(workEntry.Path, args.searchTerm)
+					workerResult := worker.FindInFile(workEntry.Path, args.SearchTerm)
 					if workerResult != nil {
 						for _, r := range workerResult.Inner {
 							results <- r
